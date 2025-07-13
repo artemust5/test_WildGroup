@@ -8,17 +8,20 @@ public class CollectibleManager : MonoBehaviour {
 
   private int coinCount = 0;
 
+  /// <summary>
+  /// Ensures singleton instance for global access.
+  /// Destroys duplicate managers.
+  /// </summary>
   private void Awake() {
     if (Instance == null) Instance = this;
     else Destroy(gameObject);
   }
 
-  // Викликається кожного разу, коли персонаж збирає монетку
+  /// <summary>
+  /// Adds one coin and notifies listeners of updated count.
+  /// </summary>
   public void CollectCoin() {
     coinCount++;
     OnCoinCountChanged?.Invoke(coinCount);
   }
-
-  // (За потреби) отримати поточний рахунок
-  public int GetCoinCount() => coinCount;
 }

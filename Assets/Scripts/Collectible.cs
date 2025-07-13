@@ -1,12 +1,19 @@
 using UnityEngine;
 
 public class Collectible : MonoBehaviour {
+  [Header("Animator")]
+  [SerializeField] private Animator _animator;
+  [Header("Animator")]
+  [SerializeField] private ParticleSystem _collect;
+  [Header("Sounds")]
+  [SerializeField] private AudioSource _collectSound;
+
   private void OnTriggerEnter(Collider other) {
     if (other.CompareTag("Player")) {
-      // Повідомляємо менеджер про збір
       CollectibleManager.Instance.CollectCoin();
-      // Вимикаємо об’єкт (або анімація зникнення)
-      gameObject.SetActive(false);
+      _collect.Play();
+      _collectSound.Play();
+      _animator.SetTrigger("IsCollect");
     }
   }
 }

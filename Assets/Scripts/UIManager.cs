@@ -26,7 +26,6 @@ public class UIManager : MonoBehaviour {
   }
 
   private void Start() {
-    // Початковий стан
     coinText.text = "0";
     gameOverPanel.SetActive(false);
   }

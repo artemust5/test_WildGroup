@@ -8,28 +8,35 @@ public class GameManager : MonoBehaviour {
   public event Action OnGameStart;
   public event Action OnGameOver;
 
+  /// <summary>
+  /// Ensures a single instance and destroys duplicates.
+  /// </summary>
   private void Awake() {
-    // Singleton
     if (Instance == null) Instance = this;
     else Destroy(gameObject);
   }
 
-  // Викликається при натисканні Start у меню
+  /// <summary>
+  /// Invokes the game start event for listeners.
+  /// </summary>
   public void StartGame() {
     OnGameStart?.Invoke();
   }
 
-  // Викликається при зіткненні з перешкодою
+  /// <summary>
+  /// Triggers the game over event for listeners.
+  /// </summary>
   public void TriggerGameOver() {
     OnGameOver?.Invoke();
   }
 
-  // Перезапуск рівня
+  /// <summary>
+  /// Reloads the current active scene.
+  /// </summary>
   public void Retry() {
     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
   }
 
-  // Повернення в головне меню
   public void ExitToMenu() {
     SceneManager.LoadScene("MainMenu");
   }

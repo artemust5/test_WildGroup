@@ -2,6 +2,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class MainMenuManager : MonoBehaviour {
   [SerializeField] private Button startButton;
   [SerializeField] private Button exitButton;
@@ -21,6 +25,10 @@ public class MainMenuManager : MonoBehaviour {
   }
 
   private void OnExitClicked() {
-    Application.Quit();
+#if UNITY_EDITOR
+    EditorApplication.isPlaying = false; 
+#else
+        Application.Quit();                   
+#endif
   }
 }
